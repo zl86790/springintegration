@@ -1,0 +1,27 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/integration  
+            http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+	<!-- 定义一个channel -->
+	<channel id="inputChannel" />
+	<channel id="outputChannel1" />
+	<channel id="outputChannel2" />
+
+	<!-- 定义一个消费者, 输入源是上面定义的channel, 调用的是类(ref)中的方法(method) sayHello -->
+	<router input-channel="inputChannel" ref="routerService" method="sayWhat" />
+	
+	<service-activator input-channel="channelOne" ref="helloServiceOne"
+		method="sayHello" />
+	<service-activator input-channel="channelTwo" ref="helloServiceTwo"
+		method="sayHello" />
+
+	<!-- 消费者类定义 -->
+	<beans:bean id="routerService" class="name.lizhe.router.MyRouterService" />
+
+	<beans:bean id="helloServiceOne" class="name.lizhe.router.MyHelloServiceOne" />
+	<beans:bean id="helloServiceTwo" class="name.lizhe.router.MyHelloServiceTwo" />
+
+</beans:beans>
