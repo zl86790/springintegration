@@ -7,8 +7,6 @@
 
 	<!-- 定义一个channel -->
 	<channel id="inputChannel" />
-	<channel id="outputChannel1" />
-	<channel id="outputChannel2" />
 
 	<!-- 定义一个消费者, 输入源是上面定义的channel, 调用的是类(ref)中的方法(method) sayHello -->
 	<router input-channel="inputChannel" ref="routerService" method="sayWhat" />
