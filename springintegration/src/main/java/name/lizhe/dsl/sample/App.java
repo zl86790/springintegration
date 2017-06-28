@@ -1,4 +1,4 @@
-package name.lizhe.dsl;
+package name.lizhe.dsl.sample;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +22,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Main entry-point into the test application
  */
 @Configuration
-@ComponentScan("name.lizhe.dsl")    //@Component
-@IntegrationComponentScan("name.lizhe.dsl")  //@MessagingGateway
+@ComponentScan("name.lizhe.dsl.sample")    //@Component
+@IntegrationComponentScan("name.lizhe.dsl.sample")  //@MessagingGateway
 @EnableIntegration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={App.class})
