@@ -10,16 +10,20 @@
             ">
             
 	<!-- 定义通道 -->
+	<channel id="print-channel" />
 	<channel id="file-channel" />
 
 	<!-- 文件类型-输入通道适配器 -->
 	<int-file:inbound-channel-adapter
-		directory="c:/ttt/input" channel="file-channel">
+		directory="c:/ttt/input" channel="print-channel">
 		<poller fixed-rate="1000" />
 	</int-file:inbound-channel-adapter>
+	
+	<service-activator input-channel="print-channel" ref="printService"
+		method="print" output-channel="file-channel"/>
 
 	<!-- 文件类型-输出通道适配器 -->
 	<int-file:outbound-channel-adapter
 		directory="c:/ttt/output" channel="file-channel" />
-
+	<beans:bean id="printService" class="name.lizhe.channeladapter.file.Printer" />
 </beans:beans>

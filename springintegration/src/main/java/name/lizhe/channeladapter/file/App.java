@@ -6,6 +6,7 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 
+
 public class App {
 
 	public static void main(String args[]) {
