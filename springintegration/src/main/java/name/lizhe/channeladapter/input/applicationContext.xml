@@ -1,0 +1,31 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/integration  
+            http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+	<!-- inboundChannel class -->
+	<beans:bean id="inputService" class="name.lizhe.channeladapter.input.MyInputService" />
+
+	<channel id="inboundChannel" />
+
+	<inbound-channel-adapter ref="inputService" method="dummyInput"
+		channel="inboundChannel">
+		<poller fixed-rate="5000" />
+	</inbound-channel-adapter>
+	
+
+	<!-- 	定义一个消费者, 输入源是上面定义的channel, 调用的是类(ref)中的方法(method) sayHello -->
+	<service-activator input-channel="inboundChannel" ref="helloService"
+		method="sayHello" />
+
+	<!-- 	消费者类定义 -->
+	<beans:bean id="helloService" class="name.lizhe.channeladapter.input.MyHelloService" />
+
+<!-- 	<inbound-channel-adapter ref="source2" method="method2" -->
+<!-- 		channel="channel2"> -->
+<!-- 		<poller cron="30 * 9-17 * * MON-FRI" /> -->
+<!-- 	</inbound-channel-adapter> -->
+
+</beans:beans>

@@ -1,0 +1,25 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/integration"
+	xmlns:int-file="http://www.springframework.org/schema/integration/file"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/integration  
+            http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/file  
+        	http://www.springframework.org/schema/integration/file/spring-integration-file-2.1.xsd
+            ">
+            
+	<!-- 定义通道 -->
+	<channel id="file-channel" />
+
+	<!-- 文件类型-输入通道适配器 -->
+	<int-file:inbound-channel-adapter
+		directory="c:/ttt/input" channel="file-channel">
+		<poller fixed-rate="1000" />
+	</int-file:inbound-channel-adapter>
+
+	<!-- 文件类型-输出通道适配器 -->
+	<int-file:outbound-channel-adapter
+		directory="c:/ttt/output" channel="file-channel" />
+
+</beans:beans>
