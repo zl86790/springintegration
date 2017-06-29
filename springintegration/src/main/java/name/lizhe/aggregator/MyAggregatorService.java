@@ -1,7 +1,10 @@
-package name.lizhe.transformer;
+package name.lizhe.aggregator;
 
-public class MyTransformService {
-	public String transform(String message){
-		return message+"!!!!";
+import java.util.List;
+
+public class MyAggregatorService {
+	public List<String> aggregator(List<String> messages){
+		System.out.println(messages+" "+this.getClass());
+		return messages;
 	}
 }
