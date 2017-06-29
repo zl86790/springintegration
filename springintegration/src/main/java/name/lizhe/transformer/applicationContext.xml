@@ -1,0 +1,22 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/integration  
+            http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+	<!-- 	定义一个channel -->
+	<channel id="helloChannel" />
+	<channel id="inputChannel" />
+	
+	<transformer input-channel="inputChannel" output-channel="helloChannel" ref="transformService" method="transform"></transformer>
+
+	<!-- 	定义一个消费者, 输入源是上面定义的channel, 调用的是类(ref)中的方法(method) sayHello -->
+	<service-activator input-channel="helloChannel" ref="helloService"
+		method="sayHello" />
+
+	<!-- 	消费者类定义 -->
+	<beans:bean id="helloService" class="name.lizhe.transformer.MyHelloService" />
+	<beans:bean id="transformService" class="name.lizhe.transformer.MyTransformService" />
+
+</beans:beans>
